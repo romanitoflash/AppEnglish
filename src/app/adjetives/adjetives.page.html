@@ -1,0 +1,114 @@
+  <div class="ion-page" id="main-content"  #page>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+          List Adjetives        
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+    <!--  inpur search -->
+    <!-- input text -->  
+    <ion-item>      
+      <ion-input label="Search Adjetive"  [(ngModel)]="modelValue" label-placement="floating" fill="solid" placeholder="Type Adjetive"(ngModelChange)="onModelChange($event)"></ion-input>
+    </ion-item>
+    <ion-list  *ngIf=" adjetives.length > 1 ">
+        <ion-item>
+          <ion-grid [fixed]="true" >
+            <ion-row class="font-bold">
+              <ion-col size="1" > # </ion-col>                      
+              <ion-col size="5">Adjetive </ion-col>          
+              <ion-col size="5">  Meaning </ion-col>              
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+    </ion-list>
+    <!-- grid of adjetives -->
+    <ion-list>
+      <ion-item-sliding *ngFor="let adjetive of adjetives; let i = index" class="list-verbs">
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="1" class="ion-text-left"> {{ i + 1 }} </ion-col>
+              <ion-col size="5"> {{ adjetive.Adjetivo_positivo }}</ion-col>
+              <ion-col size="5">{{ adjetive.Traduccion }}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="setOpen(true,adjetive)" >
+          
+            <ion-icon slot="icon-only" name="eye"></ion-icon>
+          </ion-item-option>
+          
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    
+    <ion-list *ngIf=" adjetives.length <= 0  ">
+      <ion-item>
+        <h2> Sin resultdos </h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-footer *ngIf=" totalPages > 1"   >
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="loadPreviousPage()" [disabled]="currentPage === 1">
+            Previous
+          </ion-button>
+        </ion-buttons>
+        <ion-title>
+          Page {{ currentPage }} of {{ totalPages }}
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="loadNextPage()" [disabled]="currentPage === totalPages">
+            Next
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-footer> 
+
+    <!-- Modal -->
+    <ion-modal [isOpen]="isModalOpen">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title> Adjetive:  {{ adjetive.Adjetivo_positivo  }}</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpen(false)">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">           
+          <ion-card-content>           
+            <ion-list> 
+              <ion-item>
+                 Adjetive Positive: {{ adjetive.Adjetivo_positivo  }}
+              </ion-item>
+            </ion-list>
+            <ion-list>
+              <ion-item>
+                 Comparative: {{ adjetive.Comparativo  }}
+              </ion-item>
+            </ion-list>
+            <ion-list>
+              <ion-item>
+               Superlative: {{ adjetive.Superlativo  }}
+              </ion-item>
+            </ion-list>
+            <ion-list>
+              <ion-item>
+                Meaning: {{ adjetive.Traduccion  }}
+              </ion-item>
+            </ion-list>
+            
+          </ion-card-content>          
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+    </ion-content>
+  </div> 

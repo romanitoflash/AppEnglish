@@ -1,3 +1,20 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Menú Lateral -->
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/">Verbs</ion-item>
+        <!-- Añade más ítems según sea necesario -->
+        <ion-item routerLink="/adjetives">Adjetives</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Contenido Principal -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
